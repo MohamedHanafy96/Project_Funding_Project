@@ -1,0 +1,15 @@
+{
+  "name": "PyCharm",
+  "version": "2019.3.2",
+  "buildNumber": "193.6015.41",
+  "productCode": "PY",
+  "svgIconPath": "bin/pycharm.svg",
+  "launch": [
+    {
+      "os": "Windows",
+      "launcherPath": "bin/pycharm64.exe",
+      "javaExecutablePath": "jbr/bin/java.exe",
+      "vmOptionsFilePath": "bin/pycharm64.exe.vmoptions"
+    }
+  ]
+}

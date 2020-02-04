@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project Details</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://127.0.0.1:5000/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://127.0.0.1:5000/css/business-frontpage.css" />
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/projects">Project Funder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projects">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="col-xs-12" style="height:100px;"></div>
+
+        <!-- /.row -->
+        <h3 style="margin-bottom: 20px">Informations</h3>
+        <div style="height: 20px;">&nbsp;</div>
+        <div class="row">
+
+            {% for i in prevProjects %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        {% if i[8] == 1 %}
+                        <img src="{{url_for('static', filename='images/health.png')}}" style="max-width: 100%" /> {% elif i[8] == 2 %}
+                        <img src="{{url_for('static', filename='images/art.png')}}" style="max-width: 100%" /> {% elif i[8] == 3 %}
+                        <img src="{{url_for('static', filename='images/education.png')}}" style="max-width: 100%" /> {% else %}
+                        <img src="{{url_for('static', filename='images/tech.png')}}" style="max-width: 100%" /> {% endif %}
+                        <h4 class="card-title">{{ i[1] }}</h4>
+                        <p class="card-text">From:&nbsp; <a href="/userdetails/{{i[7]}}">{{ i[2] }}</a></p>
+                        <p class="card-text">{{ i[3] }}</p>
+                        <p class="card-text">Funding Limit:&nbsp;{{ i[4] }}</p>
+                        <p class="card-text">Status:&nbsp;{{ i[5] }}</p>
+                        <p class="card-text">Predecessor:&nbsp; {% if ref_proj_title == 'No Predecessor' %} {{ ref_proj_title }} {% else %}
+                            <a href="/projectdetails/{{ref_proj_id}}">{{ ref_proj_title }}</a> {% endif %}
+                        </p>
+
+                        <div class="row">&nbsp;
+                            {% if ref_status == 'offen'%}
+                            <a href="/donate/{{i[0]}}" class="btn btn-outline-success">Donate</a>
+                            &nbsp; {% endif %}
+                            <a href="/comment/{{ id }}" class="btn btn-outline-info">Comment</a> &nbsp;
+                            {% if ref_ersteller == mail %}
+                            <a href="/projectedit/{{i[0]}}" class="btn btn-outline-primary">Edit</a>&nbsp;
+                            <a href="/delete/{{i[0]}}" class="btn btn-outline-danger">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-5 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Donations :</h4> {% for i in donationInfo %} {% if i[0] %}
+                        <p class="card-text"> {{ i[0] }} : {{ i[1] }}</p>
+                        {% else %}
+                        <h7 class="card-text">No one has donated for this project</h7>
+                        {% endif %} {% endfor %}
+                    </div>
+                </div>
+            </div>
+       
+
+            <div class="col-md-5 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Comments :</h4> {% for i in comments %} {% if i[0] %}
+                        <p class="card-text"> {{ i[0] }} : {{ i[1] }}</p>
+                        {% else %}
+                        <h7 class="card-text">No one has commented in this project</h7>
+                        {% endif %} {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- /.row -->
+    <div style="height: 20px;">&nbsp;</div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="http://127.0.0.1:5000/vendor/jquery/jquery.min.js"></script>
+    <script src="http://127.0.0.1:5000/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

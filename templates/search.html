@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://127.0.0.1:5000/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://127.0.0.1:5000/css/business-frontpage.css" />
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/projects">Project Funder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projects">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="col-xs-12" style="height:100px;"></div>
+
+        <!-- /.row -->
+        <h3 style="margin-bottom: 20px">Search For Project</h3>
+        <form action="" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" required name="title" placeholder="Search By Title" value="{{ search_val }}">
+            </div>
+            <div class="form-group">
+                <input type="Submit" value="Search" class="btn btn-outline-primary" />
+            </div>
+        </form>
+
+        <div style="height: 20px;">&nbsp;</div>
+        <div class="row">
+            {% for i in searchProjects %} {% if i[0] %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        {% if i[5] == 1 %}
+                        <img src="{{url_for('static', filename='images/health.png')}}" style="max-width: 100%" /> {% elif i[5] == 2 %}
+                        <img src="{{url_for('static', filename='images/art.png')}}" style="max-width: 100%" /> {% elif i[5] == 3 %}
+                        <img src="{{url_for('static', filename='images/education.png')}}" style="max-width: 100%" /> {% else %}
+                        <img src="{{url_for('static', filename='images/tech.png')}}" style="max-width: 100%" /> {% endif %}
+                        <h4 class="card-title"><a href="/projectdetails/{{i[0]}}">{{ i[1] }}</a></h4>
+                        <p class="card-text">From:<a href="/userdetails/{{i[2]}}">&nbsp;{{ i[6] }}</a></p>
+                        <p class="card-text">Status:&nbsp;{{ i[3] }}</p>
+                        {% if i[4] %}
+                        <p class="card-text">Total Donation:&nbsp;{{ i[4] }}</p>
+                        {% else %}
+                        <p class="card-text">Totall Donation:&nbsp;0 </p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Nothing Found</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+        <!-- /.row -->
+        <div style="height: 20px;">&nbsp;</div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    < <!-- Bootstrap core JavaScript -->
+        <script src="http://127.0.0.1:5000/vendor/jquery/jquery.min.js"></script>
+        <script src="http://127.0.0.1:5000/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

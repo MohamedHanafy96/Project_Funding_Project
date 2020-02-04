@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Donate</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://127.0.0.1:5000/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://127.0.0.1:5000/css/business-frontpage.css" />
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/projects">Project Funder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projects">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <!-- Page Content -->
+    {% if tem_dcheque == "possible" %}
+        {% if noDonation == "" %}
+            <div class="container">
+                <div class="col-xs-12" style="height:100px;"></div>
+                <!-- /.row -->
+                <form action="" method="POST">
+                    {% for i in prevProjects %}
+                    <h2> Project Name : {{ i[1] }}</h2> {% endfor %}
+                    <div class="form-group">
+                        <h5><label for="usr">Donation Amount (€):</label></h5>
+                        <input type="number" class="form-control" required name="donate" placeholder="Amount">
+                    </div>
+                    <div class="form-group">
+                        Donate Anonymously
+                        <input type="radio" name="anonymousid" value="yes" >&nbsp;Yes &nbsp;
+                        <input type="radio" name="anonymousid" value="no" checked>&nbsp;No
+                    </div>
+                    <div class="form-group">
+                        <input type="Submit" value="Donate" class="btn btn-outline-success" />
+                    </div>
+                </form>
+            </div>
+
+        {% else %}
+                <div class="container">
+                <div class="col-xs-12" style="height:100px;"></div>
+                        <div class="col-md-12 mb-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">You don't have sufficient balance to donate ! </h3>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        {% endif %}
+    {% else %}
+            <div class="container">
+            <div class="col-xs-12" style="height:100px;"></div>
+                    <div class="col-md-12 mb-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">You have already donated for this project. So, You can't donate again !!  </h3>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    {% endif %}
+    <!-- /.container -->
+
+    <!-- Footer -->
+    < <!-- Bootstrap core JavaScript -->
+        <script src="http://127.0.0.1:5000/vendor/jquery/jquery.min.js"></script>
+        <script src="http://127.0.0.1:5000/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
